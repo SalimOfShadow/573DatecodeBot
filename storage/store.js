@@ -7,13 +7,13 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../keys/.env') });
 
-let jsonPath = './datecodes.json'; // Update the path to absolute if throws an error
+const jsonPath = './datecodes.json'; // Update the path to absolute if throws an error
 
-let DDRURL = 'https://bemaniwiki.com/?DanceDanceRevolution+A3';
-let SDVXURL = 'https://bemaniwiki.com/?SOUND+VOLTEX+EXCEED+GEAR';
-let IIDXURL = 'https://bemaniwiki.com/?beatmania+IIDX+31+EPOLIS';
-let POPURL = 'https://bemaniwiki.com/?pop%27n+music+UniLab';
-let GITADORAURL = 'https://bemaniwiki.com/?GITADORA+FUZZ-UP';
+const DDRURL = 'https://bemaniwiki.com/?DanceDanceRevolution+A3';
+const SDVXURL = 'https://bemaniwiki.com/?SOUND+VOLTEX+EXCEED+GEAR';
+const IIDXURL = 'https://bemaniwiki.com/?beatmania+IIDX+31+EPOLIS';
+const POPURL = 'https://bemaniwiki.com/?pop%27n+music+UniLab';
+const GITADORAURL = 'https://bemaniwiki.com/?GITADORA+FUZZ-UP';
 
 client.login(process.env.DISCORD_TOKEN);
 function setJson(game, newVersion) {
@@ -21,7 +21,7 @@ function setJson(game, newVersion) {
 	const jsonString = fs.readFileSync(jsonPath, 'utf-8');
 	const jsonObject = JSON.parse(jsonString);
 	// Modify specific fields
-	let currentGameVersion = jsonObject[game];
+	const currentGameVersion = jsonObject[game];
 	if (newVersion != currentGameVersion) {
 		jsonObject[game] = newVersion;
 		// Convert the JavaScript object back to a JSON string
@@ -88,7 +88,7 @@ async function fetchSingleGame(url) {
 }
 
 function fetchDatecode() {
-	let urlsArray = [DDRURL, SDVXURL, IIDXURL, POPURL, GITADORAURL];
+	const urlsArray = [DDRURL, SDVXURL, IIDXURL, POPURL, GITADORAURL];
 	for (const url of urlsArray) {
 		fetchSingleGame(url);
 	}
@@ -102,7 +102,7 @@ function updateDatecode() {
 }
 
 function sendMessage(game, currentGameVersion) {
-	let adminRoleId = process.env.ADMIN_ROLE_ID;
+	const adminRoleId = process.env.ADMIN_ROLE_ID;
 
 	function alert() {
 		if (newVersion.substring(4) <= currentGameVersion.substring(4)) {
